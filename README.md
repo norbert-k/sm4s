@@ -1,14 +1,82 @@
 # sm4s
+###### System metrics for Scala
+sms4s is (*JNA-based*, native) Operating System and hardware information library for Scala thats based on [OSHI](https://github.com/oshi/oshi)
+. It provides non-blocking (async) wrappers around blocking OSHI calls, while also providing **Akka** stream sources for interop with **Akka** based systems.
+#### Non-blocking, asynchronous examples
 
-#### Stream CPU Usage
 ```scala
+import scala.util.{Success, Failure}
+import scala.concurrent.ExecutionContextExecutor
+
 object Main extends App {
-  // Print out CPU Usage every second
-  val cpuDynamicSource = Source.fromGraph(new CPUDynamicSource)
-  Source.tick(1.second, 1.second, 0).zip(cpuDynamicSource).map(_._2).map(x => {
-    x.onComplete{
+  import Stats.SystemMetrics
+  import Stats.Stats
+  
+  implicit val systemMetrics: SystemMetrics = new SystemMetrics()
+  implicit val executionContextExecutor: ExecutionContextExecutor = systemMetrics.getExecutionContext
+  
+  val stats: Stats = new Stats()
+  
+  // Get Memory Stats (async)
+  stats.getHardware.getMemory.getMemoryStatsAsync.onComplete {
+    case Success(value) => println(value)
+    case Failure(exception) => System.err.println(exception)
+  }
+  
+  // Get OS Stats (async)
+  stats.getSoftware.getOperatingSystem.getOperatingSystemStatsAsync.onComplete {
+    case Success(value) => println(value)
+    case Failure(exception) => System.err.println(exception)
+  }
+}
+```
+
+#### Blocking, synchronous examples
+
+```scala
+import scala.util.{Success, Failure}
+import scala.concurrent.ExecutionContextExecutor
+
+object Main extends App {
+  import Stats.SystemMetrics
+  import Stats.Stats
+  
+  implicit val systemMetrics: SystemMetrics = new SystemMetrics()
+  
+  val stats: Stats = new Stats()
+  
+  // Get Memory Stats (sync)
+  println(stats.getHardware.getMemory.getMemoryStats)
+  
+  // Get OS Stats (sync)
+  println(stats.getSoftware.getOperatingSystem.getOperatingSystemStats)
+}
+```
+
+#### Stream example
+```scala
+import scala.util.{Success, Failure}
+import scala.concurrent.ExecutionContextExecutor
+import akka.actor.ActorSystem
+import akka.stream.ActorMaterializer
+import akka.stream.scaladsl._
+import scala.concurrent.duration._
+object Main extends App {
+  import Stats.SystemMetrics
+  import Stats.Stats
+  import Stats.Hardware.CPU.CPUDynamicSource
+  
+  implicit val actorSystem: ActorSystem = ActorSystem("sm4s-example-actor-system")
+  implicit val actorMaterializer: ActorMaterializer = ActorMaterializer()
+  
+  implicit val systemMetrics: SystemMetrics = new SystemMetrics()
+  implicit val executionContextExecutor: ExecutionContextExecutor = systemMetrics.getExecutionContext
+  
+  val cpuMetricsSource = Source.fromGraph(new CPUDynamicSource)
+  Source.tick(5.second, 5.second, 0).zip(cpuMetricsSource).map(_._2).map(cpuMetricFuture => {
+    cpuMetricFuture.onComplete {
       case Success(value) => println(value)
-      case Failure(exception) => println(exception)
+      case Failure(exception) => System.err.println(exception)
     }
   }).runWith(Sink.ignore)
 }

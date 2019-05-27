@@ -4,7 +4,11 @@ organization := "com.github.nkyian"
 
 version := "0.0.1"
 
+licenses := Seq("APL2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
+
 scalaVersion := "2.12.8"
+
+description := "System Metrics library"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % "2.5.23",
