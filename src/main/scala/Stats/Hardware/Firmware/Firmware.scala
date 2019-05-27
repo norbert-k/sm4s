@@ -4,9 +4,21 @@ import Stats.System
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
+/** Firmware stats & info
+  *
+  * @constructor create new FirmwareStats
+  * @param description  Firmware description.
+  * @param manufacturer Firmware manufacturer.
+  * @param name         Firmware name
+  * @param releaseDate  Firmware release date in ISO 8601 YYYY-MM-DD format.
+  * @param version      Firmware version
+  *
+  */
 case class FirmwareStats(description: String, manufacturer: String, name: String, releaseDate: String, version: String)
 
 class Firmware()(implicit val system: System) {
+  /** Get FirmwareStats asynchronously
+    */
   def getFirmwareStatsAsync: Future[FirmwareStats] = {
     implicit val ec: ExecutionContextExecutorService = system.getExecutionContext
     Future {
@@ -16,6 +28,8 @@ class Firmware()(implicit val system: System) {
     }
   }
 
+  /** Get FirmwareStats synchronously
+    */
   def getFirmwareStats: FirmwareStats = {
     val firmware = system.getSystemInfo.getHardware.getComputerSystem.getFirmware
     FirmwareStats(
