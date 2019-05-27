@@ -72,7 +72,9 @@ object Main extends App {
   implicit val systemMetrics: SystemMetrics = new SystemMetrics()
   implicit val executionContextExecutor: ExecutionContextExecutor = systemMetrics.getExecutionContext
   
+  // New CPU Metrics Source
   val cpuMetricsSource = Source.fromGraph(new CPUDynamicSource)
+  // Get and print out CPU Metrics every 5 seconds
   Source.tick(5.second, 5.second, 0).zip(cpuMetricsSource).map(_._2).map(cpuMetricFuture => {
     cpuMetricFuture.onComplete {
       case Success(value) => println(value)
