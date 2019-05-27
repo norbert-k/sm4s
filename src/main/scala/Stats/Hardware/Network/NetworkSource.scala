@@ -1,10 +1,12 @@
 package Stats.Hardware.Network
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class NetworkSource()(implicit val system: System) extends DefaultSource[Array[NetworkStats]] {
+/** NetworkStats source for AKKA Streams
+  */
+class NetworkSource()(implicit val system: SystemMetrics) extends DefaultSource[Array[NetworkStats]] {
   override val outletName: String = "NetworkStatsSource"
 
   val network = new Network()

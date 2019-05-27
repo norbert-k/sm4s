@@ -1,10 +1,12 @@
 package Stats.Software.OSProcess
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class OsProcessSource()(implicit val system: System) extends DefaultSource[Array[OsProcessStats]] {
+/** OsProcessStats source for AKKA Streams
+  */
+class OsProcessSource()(implicit val system: SystemMetrics) extends DefaultSource[Array[OsProcessStats]] {
   override val outletName: String = "OsProcessStatsSource"
 
   val osProcess = new OsProcess()

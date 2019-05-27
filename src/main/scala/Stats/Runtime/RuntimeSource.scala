@@ -1,10 +1,12 @@
 package Stats.Runtime
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class RuntimeSource()(implicit val system: System) extends DefaultSource[RuntimeStats] {
+/** RuntimeStats source for AKKA Streams
+  */
+class RuntimeSource()(implicit val system: SystemMetrics) extends DefaultSource[RuntimeStats] {
   override val outletName: String = "RuntimeStatsSource"
 
   val runtime = new Runtime()

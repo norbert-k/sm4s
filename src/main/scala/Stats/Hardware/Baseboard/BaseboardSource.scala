@@ -1,10 +1,12 @@
 package Stats.Hardware.Baseboard
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class BaseboardSource()(implicit val system: System) extends DefaultSource[BaseboardStats] {
+/** BaseboardStats source for AKKA Streams
+  */
+class BaseboardSource()(implicit val system: SystemMetrics) extends DefaultSource[BaseboardStats] {
   override val outletName: String = "BaseboardStatsSource"
 
   val baseboard = new Baseboard()

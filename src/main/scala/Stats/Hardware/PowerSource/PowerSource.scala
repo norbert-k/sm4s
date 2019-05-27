@@ -1,6 +1,6 @@
 package Stats.Hardware.PowerSource
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -14,7 +14,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
   */
 case class PowerSourceStats(name: String, remainingCapacity: Double, timeRemaining: Double)
 
-class PowerSource()(implicit val system: System) {
+class PowerSource()(implicit val system: SystemMetrics) {
   /** Get PowerSourceStats asynchronously
     */
   def getPowerSourceStatsAsync: Future[Array[PowerSourceStats]] = {

@@ -1,6 +1,6 @@
 package Stats.Hardware.CPU
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -67,7 +67,7 @@ case class CPUStatsDynamic(interrupts: Long,
                            systemLoadAverage: Double,
                            systemUptime: Long)
 
-class CPU()(implicit val system: System) {
+class CPU()(implicit val system: SystemMetrics) {
   /** Get CPUStats asynchronously
     */
   def getCPUStatsAsync: Future[CPUStats] = {

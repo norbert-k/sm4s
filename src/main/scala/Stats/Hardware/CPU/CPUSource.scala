@@ -1,10 +1,12 @@
 package Stats.Hardware.CPU
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class CPUSource()(implicit val system: System) extends DefaultSource[CPUStats] {
+/** CPUStats source for AKKA Streams
+  */
+class CPUSource()(implicit val system: SystemMetrics) extends DefaultSource[CPUStats] {
   override val outletName: String = "CPUStatsSource"
 
   val cpu = new CPU()
@@ -14,7 +16,9 @@ class CPUSource()(implicit val system: System) extends DefaultSource[CPUStats] {
   }
 }
 
-class CPUDynamicSource()(implicit val system: System) extends DefaultSource[CPUStatsDynamic] {
+/** CPUStatsDynamic source for AKKA Streams
+  */
+class CPUDynamicSource()(implicit val system: SystemMetrics) extends DefaultSource[CPUStatsDynamic] {
   override val outletName: String = "CPUDynamicStatsSource"
 
   val cpu = new CPU()

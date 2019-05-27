@@ -1,10 +1,12 @@
 package Stats.Hardware.UsbDevice
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class UsbDeviceSource()(implicit val system: System) extends DefaultSource[Array[UsbDeviceStats]] {
+/** UsbDeviceStats source for AKKA Streams
+  */
+class UsbDeviceSource()(implicit val system: SystemMetrics) extends DefaultSource[Array[UsbDeviceStats]] {
   override val outletName: String = "UsbStatsSource"
 
   val usb = new UsbDevice()

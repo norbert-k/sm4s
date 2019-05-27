@@ -1,6 +1,6 @@
 package Stats.Hardware.Memory
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -27,7 +27,7 @@ case class MemoryStats(available: Long, total: Long, used: Long)
   */
 case class SwapStats(swapPagesIn: Long, swapPagesOut: Long, total: Long, used: Long, available: Long, pageSize: Long)
 
-class Memory()(implicit val system: System) {
+class Memory()(implicit val system: SystemMetrics) {
   /** Get MemoryStats asynchronously
     */
   def getMemoryStatsAsync: Future[MemoryStats] = {

@@ -1,6 +1,6 @@
 package Stats.Hardware.Disks
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -53,7 +53,7 @@ case class HWDiskStoreStats(model: String,
                             partitions: Array[HWPartitionStats],
                             currentQueueLength: Long)
 
-class Disks()(implicit val system: System) {
+class Disks()(implicit val system: SystemMetrics) {
   /** Get HWDiskStoreStats asynchronously
     */
   def getDiskStatsAsync: Future[Array[HWDiskStoreStats]] = {

@@ -2,7 +2,7 @@ package Stats.Runtime
 
 import java.lang
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -17,7 +17,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
   */
 case class RuntimeStats(maxMemory: Long, freeMemory: Long, availableProcessors: Int, usedMemory: Long)
 
-class Runtime()(implicit val system: System) {
+class Runtime()(implicit val system: SystemMetrics) {
   /** Get RuntimeStats asynchronously
     */
   def getRuntimeStatsAsync: Future[RuntimeStats] = {

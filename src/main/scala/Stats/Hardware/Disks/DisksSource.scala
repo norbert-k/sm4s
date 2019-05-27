@@ -1,10 +1,12 @@
 package Stats.Hardware.Disks
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class DisksSource()(implicit val system: System) extends DefaultSource[Array[HWDiskStoreStats]] {
+/** HWDiskStoreStats source for AKKA Streams
+  */
+class DisksSource()(implicit val system: SystemMetrics) extends DefaultSource[Array[HWDiskStoreStats]] {
   override val outletName: String = "DiskStoreStatsSource"
 
   val disks = new Disks()

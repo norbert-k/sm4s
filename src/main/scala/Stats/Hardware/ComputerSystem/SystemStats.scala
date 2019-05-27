@@ -1,6 +1,6 @@
 package Stats.Hardware.ComputerSystem
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -14,7 +14,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 case class ComputerSystemStats(manufacturer: String, model: String, serialNumber: String)
 
 
-class ComputerSystem()(implicit val system: System) {
+class ComputerSystem()(implicit val system: SystemMetrics) {
   /** Get ComputerSystemStats asynchronously
     */
   def getSystemStatsAsync: Future[ComputerSystemStats] = {

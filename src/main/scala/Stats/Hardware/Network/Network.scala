@@ -2,7 +2,7 @@ package Stats.Hardware.Network
 
 import java.net.NetworkInterface
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -42,7 +42,7 @@ case class NetworkStats(bytesRecv: Long,
                         speed: Long,
                         timestamp: Long)
 
-class Network()(implicit val system: System) {
+class Network()(implicit val system: SystemMetrics) {
   /** Get NetworkStats asynchronously
     */
   def getNetworkStatsAsync: Future[Array[NetworkStats]] = {

@@ -1,10 +1,12 @@
 package Stats.Hardware.SoundCard
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class SoundCardSource()(implicit val system: System) extends DefaultSource[Array[SoundCardStats]] {
+/** SoundCardStats source for AKKA Streams
+  */
+class SoundCardSource()(implicit val system: SystemMetrics) extends DefaultSource[Array[SoundCardStats]] {
   override val outletName: String = "SoundCardSource"
 
   val soundCards = new SoundCard()

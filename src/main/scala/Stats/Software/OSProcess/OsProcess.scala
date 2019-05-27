@@ -1,6 +1,6 @@
 package Stats.Software.OSProcess
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -60,7 +60,7 @@ case class OsProcessStats(cpuPercent: Double,
                           virtualSize: Long,
                          )
 
-class OsProcess()(implicit val system: System) {
+class OsProcess()(implicit val system: SystemMetrics) {
   /** Get ProcessStats asynchronously
     */
   def getOsProcessStatsAsync: Future[Array[OsProcessStats]] = {

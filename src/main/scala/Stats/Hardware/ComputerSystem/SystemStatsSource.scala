@@ -1,10 +1,12 @@
 package Stats.Hardware.ComputerSystem
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class SystemStatsSource()(implicit val system: System) extends DefaultSource[ComputerSystemStats] {
+/** ComputerSystemStats source for AKKA Streams
+  */
+class SystemStatsSource()(implicit val system: SystemMetrics) extends DefaultSource[ComputerSystemStats] {
   override val outletName: String = "BaseboardStatsSource"
 
   val cs = new ComputerSystem()

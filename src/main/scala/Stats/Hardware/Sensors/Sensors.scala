@@ -1,6 +1,6 @@
 package Stats.Hardware.Sensors
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -14,7 +14,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
   */
 case class SensorStats(cpuTemperature: Double, cpuVoltage: Double, fanSpeeds: Array[Int])
 
-class Sensors()(implicit val system: System) {
+class Sensors()(implicit val system: SystemMetrics) {
   /** Get SensorStats asynchronously
     */
   def getSensorStatsAsync: Future[SensorStats] = {

@@ -1,6 +1,6 @@
 package Stats.Hardware.Firmware
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -16,7 +16,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
   */
 case class FirmwareStats(description: String, manufacturer: String, name: String, releaseDate: String, version: String)
 
-class Firmware()(implicit val system: System) {
+class Firmware()(implicit val system: SystemMetrics) {
   /** Get FirmwareStats asynchronously
     */
   def getFirmwareStatsAsync: Future[FirmwareStats] = {

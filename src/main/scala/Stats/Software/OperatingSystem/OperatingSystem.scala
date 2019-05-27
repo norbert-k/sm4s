@@ -1,6 +1,6 @@
 package Stats.Software.OperatingSystem
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -35,7 +35,7 @@ case class OperatingSystemVersion(buildNumber: String, codeName: String, version
       operatingSystemVersion.getVersion)
 }
 
-class OperatingSystem()(implicit val system: System) {
+class OperatingSystem()(implicit val system: SystemMetrics) {
   /** Get OperatingSystemStats asynchronously
     */
   def getOperatingSystemStatsAsync: Future[OperatingSystemStats] = {

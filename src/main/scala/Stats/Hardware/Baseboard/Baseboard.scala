@@ -1,8 +1,9 @@
 package Stats.Hardware.Baseboard
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, _}
+
 
 /** Baseboard (Motherboard) stats & info
   *
@@ -14,7 +15,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, _}
   */
 case class BaseboardStats(manufacturer: String, model: String, serialNumber: String, version: String)
 
-class Baseboard()(implicit val system: System) {
+class Baseboard()(implicit val system: SystemMetrics) {
   /** Get BaseboardStats asynchronously
     */
   def getBaseBoardStatsAsync: Future[BaseboardStats] = {

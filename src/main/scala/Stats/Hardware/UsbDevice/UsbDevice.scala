@@ -1,6 +1,6 @@
 package Stats.Hardware.UsbDevice
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -16,7 +16,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
   */
 case class UsbDeviceStats(name: String, productId: String, serialNumber: String, vendor: String, vendorId: String)
 
-class UsbDevice()(implicit val system: System) {
+class UsbDevice()(implicit val system: SystemMetrics) {
   /** Get UsbDeviceStats asynchronously
     */
   def getUsbDeviceStatsAsync: Future[Array[UsbDeviceStats]] = {

@@ -1,10 +1,12 @@
 package Stats.Hardware.PowerSource
 
-import Stats.{DefaultSource, System}
+import Stats.{DefaultSource, SystemMetrics}
 
 import scala.concurrent.Future
 
-class PowerSourceSource()(implicit val system: System) extends DefaultSource[Array[PowerSourceStats]] {
+/** PowerSourceStats source for AKKA Streams
+  */
+class PowerSourceSource()(implicit val system: SystemMetrics) extends DefaultSource[Array[PowerSourceStats]] {
   override val outletName: String = "PowerSourceStatsSource"
 
   val powerSource = new PowerSource()

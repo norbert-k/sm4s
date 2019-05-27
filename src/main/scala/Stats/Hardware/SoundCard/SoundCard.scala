@@ -1,6 +1,6 @@
 package Stats.Hardware.SoundCard
 
-import Stats.System
+import Stats.SystemMetrics
 
 import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
 
@@ -14,7 +14,7 @@ import scala.concurrent.{ExecutionContextExecutorService, Future, blocking}
   */
 case class SoundCardStats(codec: String, driverVersion: String, name: String)
 
-class SoundCard()(implicit val system: System) {
+class SoundCard()(implicit val system: SystemMetrics) {
   /** Get SoundCardStats asynchronously
     */
   def getSoundCardStatsAsync: Future[Array[SoundCardStats]] = {
