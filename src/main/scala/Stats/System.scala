@@ -14,5 +14,6 @@ class System {
   }
 
   def getExecutionContext: ExecutionContextExecutorService = executionContext
+
   def getSystemInfo: SystemInfo = systemInfo
 }
