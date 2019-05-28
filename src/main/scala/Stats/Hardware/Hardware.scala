@@ -3,6 +3,7 @@ package Stats.Hardware
 import Stats.Hardware.Baseboard.Baseboard
 import Stats.Hardware.CPU.CPU
 import Stats.Hardware.Disks.Disks
+import Stats.Hardware.Display.Display
 import Stats.Hardware.Firmware.Firmware
 import Stats.Hardware.Memory.Memory
 import Stats.Hardware.Network.Network
@@ -24,6 +25,10 @@ class Hardware()(implicit val system: SystemMetrics) {
   /** Get Disks object
     */
   def getDisks = new Disks()
+
+  /** Get Display object
+    */
+  def getDisplay = new Display()
 
   /** Get Firmware object
     */
